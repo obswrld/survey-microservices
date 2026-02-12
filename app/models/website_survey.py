@@ -26,7 +26,7 @@ class Branding(BaseModel):
     brand_guidelines_url: Optional[str] = Field(None, description="Brand Guidelines URL of the organization")
 
 class WebStructure(BaseModel):
-    required_pages: Optional[str] = Field(..., description="Required pages URL of the organization")
+    required_pages: str = Field(..., description="Required pages URL of the organization")
     has_navigation: bool = Field(False, description="Whether the organization has navigation")
     has_footer: bool = Field(False, description="Whether the organization has footer")
     primary_cta: str = Field(..., description="Primary call to action for visitors")
@@ -104,6 +104,7 @@ class SurveyResponse(BaseModel):
     gallery: Gallery
     faq: FAQ
     domain: Domain
+    status: str = Field(default="pending", description="Survey status: pending, in_progress, completed, approved")
     created_at: datetime
     updated_at: datetime
 
@@ -133,3 +134,4 @@ class SurveyUpdate(BaseModel):
     gallery: Optional[Gallery] = None
     faq: Optional[FAQ] = None
     domain: Optional[Domain] = None
+    status: Optional[str] = None
