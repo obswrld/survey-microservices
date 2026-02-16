@@ -4,7 +4,6 @@ from bson import ObjectId
 from pymongo.database import Database
 from app.models import CustomSurveyTemplateCreate, CustomSurveyTemplateUpdate
 
-
 class CustomSurveyTemplateService:
     def __init__(self, db: Database):
         self.templates_collection = db["custom_survey_templates"]
@@ -50,14 +49,14 @@ class CustomSurveyTemplateService:
             template["response_count"] = response_count
         return templates
 
-    def update_templates(self, template_data: CustomSurveyTemplateUpdate) -> bool:
+    def update_template(self, template_id:str, template_data: CustomSurveyTemplateUpdate) -> bool:
         try:
             update_dict = template_data.model_dump(exclude_unset=True)
             if not update_dict:
                 return False
             update_dict["updated_at"] = datetime.utcnow()
             result = self.templates_collection.update_one(
-                {"_id": template_data.template_id},
+                {"_id": ObjectId(template_id)},
                 {"$set": update_dict}
             )
             return result.modified_count > 0
@@ -72,3 +71,9 @@ class CustomSurveyTemplateService:
         except Exception as e:
             print(f"Error deleting template: {e}")
             return False
+
+    def count_templates(self, is_active: Optional[bool] = None) -> int:
+        filter_criteria = {}
+        if is_active is not None:
+            filter_criteria["is_active"] = is_active
+        return self.templates_collection.count_documents(filter_criteria)
