@@ -13,7 +13,7 @@ class CustomSurveyResponseDetail(BaseModel):
     id: str = Field(..., alias="_id", description="Response ID")
     template_id: str = Field(..., description="Template/Schema ID")
     template_name: str = Field(..., description="Survey name")
-    schema: List[FieldSchema] = Field(..., description="Survey field definitions")
+    survey_schema: List[FieldSchema] = Field(..., description="Survey field definitions")
     responses: Dict[str, Any] = Field(..., description="Submitted field values")
     submitted_by: Optional[str] = Field(None, description="Submitter ID/email")
     submitted_at: datetime = Field(..., description="Submission timestamp")
@@ -26,7 +26,7 @@ class CustomSurveyResponseDetail(BaseModel):
                 "_id": " ",
                 "template_id": " ",
                 "template_name": " ",
-                "schema": [
+                "survey_schema": [
                     {
                         "field_id": "f1",
                         "title": "First Name",

@@ -11,9 +11,9 @@ class Settings(BaseSettings):
     
     APP_HOST: str = Field(default="0.0.0.0")
     APP_PORT: int = Field(default=8000)
-    
+    #use AWS S3 -> setup an account for it
     UPLOAD_DIR: str = Field(default="uploads")
-    
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

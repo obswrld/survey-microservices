@@ -59,7 +59,7 @@ class TagSurveyService:
     def count_surveys(self) -> int:
         return self.collection.count_documents({})
 
-    def get_tag_survey_by_status(self, status: str, skip: int = 0, limit: int = 10) -> List[dict]:
+    def get_survey_by_status(self, status: str, skip: int = 0, limit: int = 10) -> List[dict]:
         surveys = list(
             self.collection.find({"status": status})
             .skip(skip)

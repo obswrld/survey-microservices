@@ -22,7 +22,7 @@ class FieldSchema(BaseModel):
 class CustomSurveyTemplateCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=200, description="Survey name")
     description: Optional[str] = Field(None, max_length=1000, description="Survey description")
-    schema: List[FieldSchema] = Field(..., min_items=1, description="List of fields in the survey")
+    survey_schema: List[FieldSchema] = Field(..., min_items=1, description="List of fields in the survey")
     created_by: Optional[str] = Field(None, description="User ID or email of creator")
     is_active: bool = Field(default=True, description="Whether this template is active")
 
@@ -30,7 +30,7 @@ class CustomSurveyTemplateResponse(BaseModel):
     id: str = Field(..., alias="_id", description="Template ID")
     name: str
     description: Optional[str]
-    schema: List[FieldSchema]
+    survey_schema: List[FieldSchema]
     created_by: Optional[str]
     is_active: bool
     created_at: datetime
@@ -44,7 +44,7 @@ class CustomSurveyTemplateResponse(BaseModel):
                 "_id": " ",
                 "name": " ",
                 "description": " ",
-                "schema": [
+                "survey_schema": [
                     {
                         "field_id": "f1",
                         "title": "First Name",
@@ -74,5 +74,5 @@ class CustomSurveyTemplateResponse(BaseModel):
 class CustomSurveyTemplateUpdate(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
-    schema: Optional[List[FieldSchema]] = None
+    survey_schema: Optional[List[FieldSchema]] = None
     is_active: Optional[bool] = None
