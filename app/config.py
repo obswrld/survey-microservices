@@ -11,8 +11,12 @@ class Settings(BaseSettings):
     
     APP_HOST: str = Field(default="0.0.0.0")
     APP_PORT: int = Field(default=8000)
-    #use AWS S3 -> setup an account for it
-    UPLOAD_DIR: str = Field(default="uploads")
+
+    # AWS S3 Configuration
+    AWS_ACCESS_KEY_ID: str = Field(default="")
+    AWS_SECRET_ACCESS_KEY: str = Field(default="")
+    AWS_REGION: str = Field(default="us-east-1") # Example region, change as needed
+    S3_BUCKET_NAME: str = Field(default="your-s3-bucket-name") # Replace with your S3 bucket name
 
     class Config:
         env_file = ".env"
