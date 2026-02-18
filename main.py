@@ -2,10 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.connection import MongoDBConnection
 from app.routes import (
-    website_survey_router,
-    tag_survey_router,
-    custom_survey_template_router,
-    custom_survey_response_router
+    website_survey_router
 )
 
 app = FastAPI(
@@ -51,9 +48,6 @@ async def health_check():
     }
 
 app.include_router(website_survey_router, prefix="/api/v1")
-app.include_router(tag_survey_router, prefix="/api/v1")
-app.include_router(custom_survey_template_router, prefix="/api/v1")
-app.include_router(custom_survey_response_router, prefix="/api/v1")
 
 if __name__ == "__main__":
     import uvicorn
